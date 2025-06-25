@@ -439,6 +439,18 @@ function bolyminput(name) {
     return sum;
   }
 
+  this.calcdistance = function() {
+    var dist = this.chars[0] % 10 + Math.floor(this.chars[0] / 10);
+    for (var n=0;n<25;++n) {
+      var x1 = this.chars[n] % 10;
+      var y1 = Math.floor(this.chars[n] / 10);
+      var x2 = this.chars[n+1] % 10;
+      var y2 = Math.floor(this.chars[n+1] / 10);
+      dist += Math.abs(x1-x2) + Math.abs(y1-y2);
+    }
+    return dist;
+  }
+
   this.updatepassword = function() {
     var s = '';
     for (var n=0;n<26;++n) {
@@ -446,6 +458,7 @@ function bolyminput(name) {
     }
 
     this.tas('l1', s.substr(0, 6)+ ' ' + s.substr( 6,7)+ ' ' + s.substr(13,6)+ ' ' + s.substr(19,7))
+    this.txs('msg', this.calcdistance()+26 + ' inputs');
   }
 
   this.decode = function() {
